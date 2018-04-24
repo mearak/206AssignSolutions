@@ -1,0 +1,11 @@
+Part 1) 
+The main function calls A) load_one_preference, B) print_preference, and the C) 2 difference functions. A) Is a loop reading the file that mainly delegates to LOAD_FIELD, a pre-processor macro that calls one of the 3 input* functions, depending on the function pointer in input_fcn_array. B) similarly delegates printing different types with the output_fcn_array function pointers to output*. Finally, C) are 2 simple functions, each that considers one of the types of fields in the struct (numeric or alphabetic). 
+ 
+ 
+Part 2)  
+LOAD_FIELD calls one of the input* functions depending on which function address is stored at each element in the input_fcn_array. The elements of this array have been carefully set up to match the field-order within the PREFERENCE_INFO struct. Each integer element in the struct aligns with an entry of input_int, each string element of the struct with an input_string, and so on.  
+ 
+ 
+Part 3)  
+We cannot use the sizeof() struct elements to directly tell us the offset address where any struct field will begin. This is because C can choose to insert padding arbitrarily (it's not really arbitrary, but different compilers can use different rules, padding to 4, 8 or 32 byte boundaries). offsetof tells us the proper offset used by the current compiler, so it is the safe way to find the address of each field. 
+
